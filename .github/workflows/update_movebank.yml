@@ -25,7 +25,7 @@ jobs:
           Rscript -e 'install.packages(c("pacman", "dplyr", "lubridate", "move", "leaflet", "htmlwidgets", "jsonlite"))'
 
       - name: Ejecutar script de R
-        run: Rscript descargar_datos.R  # Reemplaza con el nombre real de tu script
+        run: Rscript 00_Download_data_Movebank.R  # Reemplaza con el nombre real de tu script
 
       - name: Subir cambios a GitHub
         run: |
