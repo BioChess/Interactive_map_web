@@ -21,7 +21,8 @@ print(paste("Study name:", st))  # Debugging
 
 # Verify if study exists
 studies <- getMovebankStudies(login = loginStored)
-print(studies)  # Print available studies
+print("Available studies:")
+print(studies)
 
 # Check if the study exists
 if (!(st %in% studies$studyName)) {
