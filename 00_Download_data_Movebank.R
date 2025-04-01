@@ -25,7 +25,7 @@ print("Available studies:")
 print(studies)
 
 # Check if the study exists
-if (!(st %in% studies$studyName)) {
+if (!(st %in% studies)) {
   stop("Error: Study not found in Movebank.")
 }
 
