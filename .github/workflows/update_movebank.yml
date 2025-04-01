@@ -3,7 +3,7 @@ name: Actualizar datos Movebank
 on:
   schedule:
     - cron: '0 0 * * *' # Ejecuta el script todos los días a la medianoche UTC
-  workflow_dispatch: #Permite ejecutar manualmente
+  workflow_dispatch: # Permite ejecutar manualmente
 
 jobs:
   update-movebank:
@@ -21,21 +21,19 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libcurl4-openssl-dev libpng-dev gdal-bin libgdal-dev
 
-    name: Instalar paquetes R
-  run: |
-    Rscript -e 'install.packages("remotes")'
-    Rscript -e 'install.packages(c("pacman", "dplyr", "lubridate", "leaflet", "htmlwidgets", "jsonlite"))'
-    Rscript -e 'remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
+    - name: Instalar paquetes R
+      run: |
+        Rscript -e "install.packages('remotes')"
+        Rscript -e "install.packages(c('pacman', 'dplyr', 'lubridate', 'leaflet', 'htmlwidgets', 'jsonlite'))"
+        Rscript -e "remotes::install_version('move', version = '4.0.6', repos = 'http://cran.us.r-project.org')"
+
     - name: Run R script
       run: Rscript 00_Download_data_Movebank.R
 
-      - name: Subir cambios a GitHub
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add gps_data.csv gps_data.json
-          git commit -m "Actualización automática de datos Movebank" || echo "Sin cambios"
-          git push
-
-
-
+    - name: Subir cambios a GitHub
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "actions@github.com"
+        git add gps_data.csv gps_data.json
+        git commit -m "Actualización automática de datos Movebank" || echo "Sin cambios"
+        git push
