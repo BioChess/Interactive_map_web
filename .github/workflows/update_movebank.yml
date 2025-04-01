@@ -21,11 +21,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libcurl4-openssl-dev libpng-dev gdal-bin libgdal-dev
 
-    - name: Instalar paquetes R
+    - name: Instalar paquetes R (solo si no están instalados)
       run: |
-        Rscript -e "install.packages('remotes')"
-        Rscript -e "install.packages(c('pacman', 'dplyr', 'lubridate', 'leaflet', 'htmlwidgets', 'jsonlite'))"
-        Rscript -e "remotes::install_version('move', version = '4.0.6', repos = 'http://cran.us.r-project.org')"
+        Rscript -e 'packages <- c("pacman", "dplyr", "lubridate", "move", "leaflet", "htmlwidgets", "jsonlite");
+                 new.packages <- packages[!(packages %in% installed.packages()[,"Package"])];
+                 if(length(new.packages)) install.packages(new.packages, dependencies=TRUE)'
+        Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
     - name: Run R script
       run: Rscript 00_Download_data_Movebank.R
