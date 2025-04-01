@@ -27,9 +27,20 @@ jobs:
         Rscript -e 'pacman::p_load(dplyr, lubridate, move, leaflet, htmlwidgets, jsonlite, remotes)'
         Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
-  
+    - name: Verificar que los secretos se pasen correctamente
+      run: |
+        echo "Usuario: ${{ secrets.MOVEBANK_USER }}"
+        echo "Longitud de la contraseña: ${#MOVEBANK_PASSWORD}"
+      shell: bash
+      env:
+        MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
+        MOVEBANK_PASSWORD: ${{ secrets.MOVEBANK_PASSWORD }}
+
     - name: Run R script
       run: Rscript 00_Download_data_Movebank.R
+      env:
+        MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
+        MOVEBANK_PASSWORD: ${{ secrets.MOVEBANK_PASSWORD }}
 
     - name: Subir cambios a GitHub
       run: |
