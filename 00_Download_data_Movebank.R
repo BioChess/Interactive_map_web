@@ -2,8 +2,10 @@ library(pacman)
 pacman::p_load("dplyr", "lubridate", "move", "leaflet", "htmlwidgets", "jsonlite")
 
 # Retrieve credentials from environment variables
-user <- Sys.getenv("MOVEBANK_USER")
-password <- Sys.getenv("MOVEBANK_PASS")
+#user <- Sys.getenv("MOVEBANK_USER")
+#password <- Sys.getenv("MOVEBANK_PASS")
+user <- 'Bulwer'
+password <- 'U84E5rbGP6'
 
 # Debugging: Print if credentials are set
 print(paste("User:", user))  # It should not be empty
