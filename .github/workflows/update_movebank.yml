@@ -2,8 +2,8 @@ name: Actualizar datos Movebank
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # Ejecuta el script todos los días a la medianoche UTC
+  workflow_dispatch: #Permite ejecutar manualmente
 
 jobs:
   update-movebank:
