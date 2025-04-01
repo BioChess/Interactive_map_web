@@ -1,7 +1,6 @@
 
 library(pacman)
-pacman::p_load("dplyr", "lubridate", "move", 
-               "leaflet", "htmlwidgets", "jsonlite")
+pacman::p_load("dplyr", "lubridate", "move", "leaflet", "htmlwidgets", "jsonlite")
 
 user <- Sys.getenv("MOVEBANK_USER")
 password <- Sys.getenv("MOVEBANK_PASS")
