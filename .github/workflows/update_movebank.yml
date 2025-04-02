@@ -73,7 +73,7 @@ jobs:
         git stash pop || echo "No había cambios guardados en stash"
 
         # Agregar los archivos modificados
-        git add gps_data.csv gps_data.json docs/mapa_interactivo.html
+        git add gps_data.csv gps_data.json docs/index.html
 
         # Si hay cambios, hacer commit
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
