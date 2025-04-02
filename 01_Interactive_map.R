@@ -12,7 +12,8 @@ gps.df$datetimeGMT <- as.POSIXct(gps.df$datetimeGMT, format="%Y-%m-%d %H:%M:%S",
 paleta_colores <- colorFactor(palette = "Set1", domain = gps.df$birdID)
 
 # Crear el mapa base
-mapa <- leaflet() %>%
+leafletOptions <- leaflet::leafletOptions(preferCanvas = TRUE)
+mapa <- leaflet(options = leafletOptions) %>%
   addTiles(options = tileOptions(maxZoom = 10))
 
 # Agregar capas de tracks por cada individuo
@@ -33,7 +34,7 @@ for (bird in grupos) {
       lng = ~longitude, lat = ~latitude, 
       data = datos_individual,
       radius = 0.5, color = ~paleta_colores(birdID), 
-      popup = ~paste("Ave:", birdID, "<br>Fecha:", datetimeGMT),
+      popup = ~paste("ID:", birdID, "<br>Date:", datetimeGMT),
       group = bird  # Asigna un grupo con el nombre del birdID
     ) 
 }
@@ -46,4 +47,4 @@ mapa <- mapa %>%
   )
 
 # Guardar el mapa como archivo HTML
-saveWidget(mapa, file = "docs/index.html", selfcontained = TRUE)
+saveWidget(mapa, file = "docs/index.html", selfcontained = FALSE)
