@@ -56,6 +56,9 @@ jobs:
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
         
+        # Agregar el archivo antes de hacer pull para evitar el error
+        git add mapa_interactivo.html || echo "No hay cambios en mapa_interactivo.html"
+
         # Guardar temporalmente cambios locales para evitar conflictos
         git stash
 
@@ -75,6 +78,7 @@ jobs:
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
