@@ -36,11 +36,14 @@ jobs:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
 
-    - name: Run R script
+    - name: Descargar datos de Movebank
       run: Rscript 00_Download_data_Movebank.R
       env:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
+
+    - name: Generar mapa interactivo
+      run: Rscript 01_Interactive_map.R
 
     - name: Subir cambios a GitHub
       run: |
@@ -52,15 +55,17 @@ jobs:
         git pull origin main --rebase
         
         # Agregar los archivos modificados
-        git add gps_data.csv gps_data.json
+        git add gps_data.csv gps_data.json mapa_interactivo.html
         
         # Si hay cambios, hacer commit
-        git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank"
+        git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa"
         
         # Hacer push al repositorio
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 
 
 
