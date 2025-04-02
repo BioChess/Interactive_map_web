@@ -13,7 +13,7 @@ paleta_colores <- colorFactor(palette = "Set1", domain = gps.df$birdID)
 
 # Crear el mapa base
 mapa <- leaflet() %>%
-  addTiles()
+  addTiles(options = tileOptions(maxZoom = 10))
 
 # Agregar capas de tracks por cada individuo
 grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
