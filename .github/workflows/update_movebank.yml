@@ -41,6 +41,8 @@ jobs:
       env:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
+    - name: Install pandoc
+      run: sudo apt-get install -y pandoc 
 
     - name: Generar mapa interactivo
       run: Rscript 01_Interactive_map.R
