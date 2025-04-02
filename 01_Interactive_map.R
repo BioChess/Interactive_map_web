@@ -46,4 +46,4 @@ mapa <- mapa %>%
   )
 
 # Guardar el mapa como archivo HTML
-saveWidget(mapa, file = "docs/mapa_interactivo.html", selfcontained = TRUE)
+saveWidget(mapa, file = "docs/index.html", selfcontained = TRUE)
