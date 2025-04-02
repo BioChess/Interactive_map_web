@@ -43,10 +43,13 @@ jobs:
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
     - name: Install pandoc
       run: sudo apt-get install -y pandoc 
+      
+    - name: Crear carpeta docs si no existe
+      run: mkdir -p docs/
 
     - name: Generar mapa interactivo
       run: Rscript 01_Interactive_map.R
-
+      
     - name: Subir cambios a GitHub
       run: |
         git config --global user.name "github-actions"
@@ -63,10 +66,10 @@ jobs:
         git stash pop || echo "No hay cambios guardados en stash"
 
         # Agregar los archivos modificados
-        git add gps_data.csv gps_data.json mapa_interactivo.html
+        git add gps_data.csv gps_data.json docs/mapa_interactivo.html
         
         # Si hay cambios, hacer commit
-        git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa"
+        git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
         
         # Hacer push al repositorio
         git push origin main
