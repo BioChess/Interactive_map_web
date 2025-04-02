@@ -56,14 +56,18 @@ jobs:
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
         
-        # Agregar el archivo antes de hacer pull para evitar el error
-        git add mapa_interactivo.html || echo "No hay cambios en mapa_interactivo.html"
+        # Asegurar que docs/ existe
+        mkdir -p docs/
+
+        # Agregar manualmente el archivo a seguimiento (solución clave)
+        git add docs/mapa_interactivo.html || echo "No hay cambios en docs/mapa_interactivo.html"
+        git commit -m "Añadiendo mapa_interactivo.html para evitar errores" || echo "Sin cambios para commit"
 
         # Guardar temporalmente cambios locales para evitar conflictos
         git stash
 
         # Obtener los últimos cambios del repo remoto
-        git pull origin main --rebase
+        git pull origin main --rebase || (git reset --hard HEAD && git pull origin main)
 
         # Restaurar los cambios locales
         git stash pop || echo "No hay cambios guardados en stash"
@@ -78,6 +82,7 @@ jobs:
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
