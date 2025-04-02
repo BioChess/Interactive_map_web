@@ -49,36 +49,38 @@ jobs:
 
     - name: Generar mapa interactivo
       run: Rscript 01_Interactive_map.R
-
+      
     - name: Subir cambios a GitHub
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
-
+        
         # Asegurar que docs/ existe
         mkdir -p docs/
-
-        # Si el archivo no está en Git, agregarlo manualmente
-        git ls-files --error-unmatch docs/mapa_interactivo.html || git add docs/mapa_interactivo.html
-        git commit -m "Forzando seguimiento de mapa_interactivo.html" || echo "Sin cambios en mapa_interactivo.html"
-
+    
+        # Si el archivo no está en Git, forzar su inclusión antes del pull
+        git ls-files --error-unmatch docs/index.html || git add docs/index.html
+        git commit -m "Forzando seguimiento de index.html" || echo "Sin cambios para commit"
+    
         # Guardar cambios temporales para evitar conflictos
-        git stash push --include-untracked || echo "Nada que guardar en stash"
-
-        # Hacer pull con rebase para evitar conflictos
+        git stash
+        
+        # Hacer pull con opción de rebase
         git pull origin main --rebase || (git reset --hard HEAD && git pull origin main)
-
+    
         # Restaurar los cambios guardados
-        git stash pop || echo "No había cambios guardados en stash"
-
+        git stash pop || echo "No hay cambios guardados en stash"
+    
         # Agregar los archivos modificados
         git add gps_data.csv gps_data.json docs/index.html
-
+        
         # Si hay cambios, hacer commit
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
-
+    
         # Hacer push al repositorio
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      
