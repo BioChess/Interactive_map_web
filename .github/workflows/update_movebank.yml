@@ -45,7 +45,7 @@ jobs:
     - name: Preparar directorio de salida
       run: |
         mkdir -p docs/   # Crear carpeta docs si no existe
-        rm -f docs/mapa_interactivo.html  # Eliminar archivo antiguo si existe
+        rm -f docs/index.html  # Eliminar archivo antiguo si existe
 
     - name: Generar mapa interactivo
       run: Rscript 01_Interactive_map.R
