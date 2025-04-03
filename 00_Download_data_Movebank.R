@@ -69,7 +69,7 @@ gps.df <- data.frame(
 
 gps.df$sex <- gps@idData$sex[match(gps.df$birdID, gps@idData$ring_id)]
 
-gps.df$sex <- ifelse(gps.df$sex == 'f', 'Hembra', 'Desconocido')
+gps.df$sex <- ifelse(gps.df$sex == 'f', 'Female', 'Unknown')
 
 head(gps.df)
 
