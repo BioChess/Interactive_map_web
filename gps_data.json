@@ -52934,6 +52934,385 @@
     "latitude": 28.6123,
     "longitude": -17.1285,
     "sex": "Unknown"
+<<<<<<< Updated upstream
+=======
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:25:11",
+    "latitude": 28.6079,
+    "longitude": -17.1305,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:35:11",
+    "latitude": 28.6094,
+    "longitude": -17.1313,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:40:11",
+    "latitude": 28.6074,
+    "longitude": -17.1345,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:45:11",
+    "latitude": 28.605,
+    "longitude": -17.1318,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:50:10",
+    "latitude": 28.6031,
+    "longitude": -17.1315,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 09:55:11",
+    "latitude": 28.6009,
+    "longitude": -17.1317,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:00:10",
+    "latitude": 28.6001,
+    "longitude": -17.135,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:05:10",
+    "latitude": 28.5987,
+    "longitude": -17.1364,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:10:11",
+    "latitude": 28.5949,
+    "longitude": -17.132,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:15:10",
+    "latitude": 28.5952,
+    "longitude": -17.133,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:20:13",
+    "latitude": 28.592,
+    "longitude": -17.1274,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:25:12",
+    "latitude": 28.5898,
+    "longitude": -17.1293,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:30:12",
+    "latitude": 28.5905,
+    "longitude": -17.1285,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:35:14",
+    "latitude": 28.5889,
+    "longitude": -17.1266,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:40:11",
+    "latitude": 28.5835,
+    "longitude": -17.1311,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:45:33",
+    "latitude": 28.5835,
+    "longitude": -17.1303,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:50:12",
+    "latitude": 28.5808,
+    "longitude": -17.1304,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 10:55:10",
+    "latitude": 28.5741,
+    "longitude": -17.1345,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:00:11",
+    "latitude": 28.5726,
+    "longitude": -17.1313,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:05:11",
+    "latitude": 28.5682,
+    "longitude": -17.1284,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:10:11",
+    "latitude": 28.5649,
+    "longitude": -17.1239,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:15:13",
+    "latitude": 28.5603,
+    "longitude": -17.1249,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:20:13",
+    "latitude": 28.5576,
+    "longitude": -17.1232,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:25:11",
+    "latitude": 28.5529,
+    "longitude": -17.1204,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:30:11",
+    "latitude": 28.5473,
+    "longitude": -17.1185,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:35:13",
+    "latitude": 28.5246,
+    "longitude": -17.1011,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:40:11",
+    "latitude": 28.5201,
+    "longitude": -17.0946,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:45:33",
+    "latitude": 28.5202,
+    "longitude": -17.0931,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:50:11",
+    "latitude": 28.5186,
+    "longitude": -17.0894,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 11:56:36",
+    "latitude": 28.4963,
+    "longitude": -17.0741,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:01:36",
+    "latitude": 28.4737,
+    "longitude": -17.0499,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:06:36",
+    "latitude": 28.4695,
+    "longitude": -17.047,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:10:33",
+    "latitude": 28.4662,
+    "longitude": -17.0464,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:15:12",
+    "latitude": 28.4657,
+    "longitude": -17.0451,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:20:10",
+    "latitude": 28.4653,
+    "longitude": -17.0443,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:25:11",
+    "latitude": 28.465,
+    "longitude": -17.0435,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:30:13",
+    "latitude": 28.4644,
+    "longitude": -17.0429,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:35:10",
+    "latitude": 28.4637,
+    "longitude": -17.0426,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:40:10",
+    "latitude": 28.4631,
+    "longitude": -17.0421,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:45:11",
+    "latitude": 28.4624,
+    "longitude": -17.0419,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:50:12",
+    "latitude": 28.4618,
+    "longitude": -17.0419,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 12:55:13",
+    "latitude": 28.4613,
+    "longitude": -17.0418,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 13:00:13",
+    "latitude": 28.4631,
+    "longitude": -17.0429,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 13:05:12",
+    "latitude": 28.4632,
+    "longitude": -17.0428,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 13:10:14",
+    "latitude": 28.4632,
+    "longitude": -17.0426,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 13:15:13",
+    "latitude": 28.4631,
+    "longitude": -17.0425,
+    "sex": "Unknown"
+  },
+  {
+    "birdID": "5102433",
+    "tagID": 370748,
+    "datetimeGMT": "2025-04-03 13:20:13",
+    "latitude": 28.4628,
+    "longitude": -17.0425,
+    "sex": "Unknown"
+>>>>>>> Stashed changes
   },
   {
     "birdID": "5102434",
