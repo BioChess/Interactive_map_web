@@ -61,4 +61,4 @@ imap <- imap %>%
   )
 
 # Guardar el mapa como archivo HTML
-saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
+saveWidget(imap, file = "docs/index.html", selfcontained = TRUE)
