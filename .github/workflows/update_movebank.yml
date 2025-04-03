@@ -66,7 +66,7 @@ jobs:
         git pull --autostash origin main --rebase || (git reset --hard HEAD && git pull origin main)
 
         # Agregar archivos
-        git add gps_data.csv gps_data.json docs/index.html docs/index_files/
+        git add gps_data.csv gps_data.json docs/index.html
     
         # Hacer commit solo si hay cambios
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
