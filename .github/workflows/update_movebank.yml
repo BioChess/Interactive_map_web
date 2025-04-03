@@ -1,10 +1,3 @@
-name: Actualizar datos Movebank
-
-on:
-  schedule:
-    - cron: '0 * * * *'  # Ejecuta cada hora
-  workflow_dispatch:  # Permite ejecución manual
-
 jobs:
   update-movebank:
     runs-on: ubuntu-latest
@@ -34,15 +27,14 @@ jobs:
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
 
     - name: Preparar directorio de salida
-      run: |
-        mkdir -p docs/
+      run: mkdir -p docs/
 
     - name: Generar mapa interactivo
       run: |
         set -e
         Rscript 01_Interactive_map.R
 
-        # Mover index_files/ a docs/ si no está ya allí
+        # Mover index_files/ a docs/ si existe
         if [ -d "index_files" ]; then
           mv -u index_files docs/
         fi
@@ -59,14 +51,18 @@ jobs:
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
 
+        # Resetear cambios locales para evitar conflictos en el pull
+        git fetch origin main
+        git reset --hard origin/main
+
         # Asegurar que docs/ existe
         mkdir -p docs/
 
-        # Hacer pull con opción de autostash para evitar conflictos
-        git pull --autostash origin main --rebase || (git reset --hard HEAD && git pull origin main)
-
-        # Agregar archivos, incluyendo index_files/
-        git add gps_data.csv gps_data.json docs/index.html docs/index_files/
+        # Agregar archivos, incluyendo index_files si existe
+        git add gps_data.csv gps_data.json docs/index.html
+        if [ -d "docs/index_files" ]; then
+          git add docs/index_files/
+        fi
 
         # Hacer commit solo si hay cambios
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
@@ -75,4 +71,5 @@ jobs:
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
