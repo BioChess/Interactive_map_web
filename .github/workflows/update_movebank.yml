@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4  # Usa la última versión
+      uses: actions/checkout@v4
 
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
@@ -35,13 +35,17 @@ jobs:
 
     - name: Preparar directorio de salida
       run: |
-        mkdir -p docs/  # Crear carpeta docs si no existe
-       
+        mkdir -p docs/
 
     - name: Generar mapa interactivo
       run: |
-        set -e  # Detiene el script si hay un error
+        set -e
         Rscript 01_Interactive_map.R
+
+        # Mover index_files/ a docs/ si no está ya allí
+        if [ -d "index_files" ]; then
+          mv -u index_files docs/
+        fi
         
         # Verificar que los archivos se generaron correctamente
         if [ ! -s docs/index.html ]; then
@@ -54,20 +58,21 @@ jobs:
         git config --global user.name "github-actions"
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
-    
+
         # Asegurar que docs/ existe
         mkdir -p docs/
-    
+
         # Hacer pull con opción de autostash para evitar conflictos
         git pull --autostash origin main --rebase || (git reset --hard HEAD && git pull origin main)
 
-        # Agregar archivos
-        git add gps_data.csv gps_data.json docs/index.html
-    
+        # Agregar archivos, incluyendo index_files/
+        git add gps_data.csv gps_data.json docs/index.html docs/index_files/
+
         # Hacer commit solo si hay cambios
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
-    
+
         # Hacer push al repositorio
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
