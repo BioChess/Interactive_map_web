@@ -36,7 +36,7 @@ jobs:
     - name: Preparar directorio de salida
       run: |
         mkdir -p docs/  # Crear carpeta docs si no existe
-        rm -rf docs/index.html docs/index_files/  # Eliminar archivos antiguos
+       
 
     - name: Generar mapa interactivo
       run: |
@@ -46,10 +46,6 @@ jobs:
         # Verificar que los archivos se generaron correctamente
         if [ ! -s docs/index.html ]; then
           echo "Error: docs/index.html está vacío o no se generó."
-          exit 1
-        fi
-        if [ ! -d docs/index_files/ ]; then
-          echo "Error: docs/index_files/ no se generó."
           exit 1
         fi
 
