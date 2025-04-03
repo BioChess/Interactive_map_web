@@ -48,34 +48,32 @@ jobs:
         rm -f docs/index.html  # Eliminar archivo antiguo si existe
 
     - name: Generar mapa interactivo
-      run: Rscript 01_Interactive_map.R
-      
+      run: |
+        set -e  # Detiene el script si hay un error
+        Rscript 01_Interactive_map.R
+
     - name: Subir cambios a GitHub
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
-        
+    
         # Asegurar que docs/ existe
         mkdir -p docs/
     
-        # Si el archivo no está en Git, forzar su inclusión antes del pull
-        git ls-files --error-unmatch docs/index.html || git add docs/index.html
-        git commit -m "Forzando seguimiento de index.html" || echo "Sin cambios para commit"
+        # Verificar que el HTML no está vacío
+        if [ ! -s docs/index.html ]; then
+          echo "Error: docs/index.html está vacío o no se generó."
+          exit 1
+        fi
     
-        # Guardar cambios temporales para evitar conflictos
-        git stash
-        
-        # Hacer pull con opción de rebase
-        git pull origin main --rebase || (git reset --hard HEAD && git pull origin main)
+        # Hacer pull con opción de autostash
+        git pull --autostash origin main --rebase || (git reset --hard HEAD && git pull origin main)
     
-        # Restaurar los cambios guardados
-        git stash pop || echo "No hay cambios guardados en stash"
-    
-        # Agregar los archivos modificados
+        # Agregar archivos
         git add gps_data.csv gps_data.json docs/index.html
-        
-        # Si hay cambios, hacer commit
+    
+        # Hacer commit solo si hay cambios
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
     
         # Hacer push al repositorio
