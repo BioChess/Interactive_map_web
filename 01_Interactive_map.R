@@ -24,7 +24,7 @@ imap <- leaflet(options = leafletOptions) %>%
 grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
 
 for (bird in grupos) {
-  gps.ind <- gps.df %>% filter(birdID == bird)  # Filtrar datos por birdID
+  gps.ind <- gps.df2 %>% filter(birdID == bird)  # Filtrar datos por birdID
   lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT))
   imap <- imap %>%
     addPolylines(
