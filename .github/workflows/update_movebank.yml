@@ -1,3 +1,10 @@
+name: Actualizar datos Movebank
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Ejecutar cada 12 horas
+  workflow_dispatch:  # Permite ejecución manual
+  
 jobs:
   update-movebank:
     runs-on: ubuntu-latest
