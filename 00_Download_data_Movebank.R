@@ -86,3 +86,8 @@ write.csv(gps.df, "gps_data.csv", row.names = FALSE)
 
 # Guardar en JSON
 write_json(gps.df, "gps_data.json", pretty = TRUE)
+
+if (!file.exists("gps_data.csv") || file.info("gps_data.csv")$size == 0) {
+  stop("Error: gps_data.csv no se generó correctamente.")
+}
+
