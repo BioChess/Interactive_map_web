@@ -67,11 +67,19 @@ gps.df <- data.frame(
   longitude = gps@data$location_long
 )
 
+if (nrow(gps.df) == 0) {
+  stop("No se obtuvieron datos GPS. No se guardará ningún archivo.")
+}
+
 gps.df$sex <- gps@idData$sex[match(gps.df$birdID, gps@idData$ring_id)]
 
 gps.df$sex <- ifelse(gps.df$sex == 'f', 'Female', 'Unknown')
 
 head(gps.df)
+
+
+if (file.exists("gps_data.csv")) file.remove("gps_data.csv")
+if (file.exists("gps_data.json")) file.remove("gps_data.json")
 
 # Guardar en CSV
 write.csv(gps.df, "gps_data.csv", row.names = FALSE)
