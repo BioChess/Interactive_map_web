@@ -61,6 +61,6 @@ imap <- imap %>%
   )
 
 # Guardar el mapa como archivo HTML
-saveWidget(imap, file = "docs/index.html", selfcontained = TRUE)
+saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
 # Mueve `index_files/` dentro de `docs/`
 file.rename("index_files", "docs/index_files")
