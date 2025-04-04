@@ -27,6 +27,11 @@ jobs:
         Rscript -e 'pacman::p_load(dplyr, lubridate, move, leaflet, htmlwidgets, jsonlite, remotes)'
         Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
+    - name: Eliminar archivos previos si existen
+      run: |
+        rm -f gps_data.csv gps_data.json
+        rm -rf docs/index.html docs/index_files
+
     - name: Descargar datos de Movebank
       run: |
         Rscript 00_Download_data_Movebank.R
@@ -82,5 +87,6 @@ jobs:
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
