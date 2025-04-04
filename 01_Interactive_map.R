@@ -59,11 +59,11 @@ for (bird in grupos) {
 }
 
 # Agregar control de capas para activar/desactivar individuos
-imap <- imap %>%
-  addLayersControl(
-    overlayGroups = grupos,  # Usa los birdID como grupos de control
-    options = layersControlOptions(collapsed = FALSE)  # Mostrar la lista expandida
-  )
+#imap <- imap %>%
+#  addLayersControl(
+#    overlayGroups = grupos,  # Usa los birdID como grupos de control
+#    options = layersControlOptions(collapsed = FALSE)  # Mostrar la lista expandida
+#  )
 
 if (!dir.exists("docs")) {
   dir.create("docs")
