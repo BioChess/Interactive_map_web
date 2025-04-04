@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 * * * *'  # Ejecuta cada hora
   workflow_dispatch:  # Permite ejecución manual
-  
+
 jobs:
   update-movebank:
     runs-on: ubuntu-latest
@@ -32,6 +32,14 @@ jobs:
       env:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
+        
+    - name: Fetch GPS data
+      run: |
+        curl -o gps_data.csv https://example.com/path/to/gps_data.csv
+        if [ ! -f gps_data.csv ]; then
+          echo "Error: gps_data.csv no existe."
+          exit 1
+        fi
 
     - name: Preparar directorio de salida
       run: mkdir -p docs/
