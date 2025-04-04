@@ -25,7 +25,12 @@ grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
 
 for (bird in grupos) {
   gps.ind <- gps.df2 %>% filter(birdID == bird)  # Filtrar datos por birdID
-  lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT))
+ 
+  if (nrow(gps.df2) == 0 || all(is.na(gps.df2$datetimeGMT))) {
+  cat("Error: No hay datos en gps.df2 o solo contiene NA.")
+  next
+} 
+  lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT, na.rm = TRUE))
   imap <- imap %>%
     addPolylines(
       lng = ~longitude, lat = ~latitude, 
