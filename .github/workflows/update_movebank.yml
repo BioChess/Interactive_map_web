@@ -2,7 +2,7 @@ name: Actualizar datos Movebank
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Ejecuta cada hora
+    - cron: '0 */12 * * *'  # Ejecutar cada 12 horas
   workflow_dispatch:  # Permite ejecución manual
 
 jobs:
@@ -28,7 +28,14 @@ jobs:
         Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
     - name: Descargar datos de Movebank
-      run: Rscript 00_Download_data_Movebank.R
+      run: |
+        Rscript 00_Download_data_Movebank.R
+
+        # Verificar que el archivo se ha creado y tiene contenido
+        if [ ! -s gps_data.csv ]; then
+          echo "Error: gps_data.csv no se generó o está vacío."
+          exit 1
+        fi
       env:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
@@ -45,11 +52,12 @@ jobs:
         if [ -d "index_files" ]; then
           mv -u index_files docs/
         fi
-        
-        # Verificar que los archivos se generaron correctamente
+
+        # Verificar que index.html se generó correctamente
         if [ ! -s docs/index.html ]; then
           echo "Error: docs/index.html está vacío o no se generó."
           exit 1
+        fi
 
     - name: Subir cambios a GitHub
       run: |
@@ -57,26 +65,20 @@ jobs:
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
 
-        # Resetear cambios locales para evitar conflictos en el pull
+        # Resetear y traer últimos cambios para evitar conflictos
         git fetch origin main
         git reset --hard origin/main
 
-        # Asegurar que docs/ existe
-        mkdir -p docs/
-
-        # Agregar archivos, incluyendo index_files si existe
-        [ -f gps_data.csv ] && git add gps_data.csv
-        [ -f gps_data.json ] && git add gps_data.json
-        [ -f docs/index.html ] && git add docs/index.html
-
+        # Agregar archivos generados
+        git add gps_data.csv gps_data.json docs/index.html || true
         if [ -d "docs/index_files" ]; then
           git add docs/index_files/
         fi
 
-        # Hacer commit solo si hay cambios
+        # Hacer commit si hay cambios
         git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
 
-        # Hacer push al repositorio
+        # Hacer push
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
