@@ -3,7 +3,7 @@ library(dplyr)
 library(htmlwidgets)
 
 # Cargar los datos GPS descargados previamente
-#gps.df <- read.csv("gps_data.csv")
+gps.df <- read.csv("gps_data.csv")
 
 # Convertir la columna de fecha a formato adecuado
 gps.df$datetimeGMT <- as.POSIXct(gps.df$datetimeGMT, format="%Y-%m-%d %H:%M:%S", tz="GMT")
