@@ -1,10 +1,3 @@
-name: Actualizar datos Movebank
-
-on:
-  schedule:
-    - cron: '0 */4 * * *'  # Ejecutar cada 12 horas
-  workflow_dispatch:  # Permite ejecución manual
-
 jobs:
   update-movebank:
     runs-on: ubuntu-latest
@@ -27,10 +20,10 @@ jobs:
         Rscript -e 'pacman::p_load(dplyr, lubridate, move, leaflet, htmlwidgets, jsonlite, remotes)'
         Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
-    - name: Eliminar archivos previos si existen
+    - name: Limpiar archivos anteriores
       run: |
+        rm -rf docs/*
         rm -f gps_data.csv gps_data.json
-        rm -rf docs/index.html docs/index_files
 
     - name: Descargar datos de Movebank
       run: |
@@ -44,9 +37,6 @@ jobs:
       env:
         MOVEBANK_USER: ${{ secrets.MOVEBANK_USER }}
         MOVEBANK_PASS: ${{ secrets.MOVEBANK_PASS }}
-
-    - name: Preparar directorio de salida
-      run: mkdir -p docs/
 
     - name: Generar mapa interactivo
       run: |
@@ -70,23 +60,11 @@ jobs:
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/BioChess/Interactive_map_web.git
 
-        # Resetear y traer últimos cambios para evitar conflictos
         git fetch origin main
         git reset --hard origin/main
 
-        # Agregar archivos generados
-        git add gps_data.csv gps_data.json docs/index.html || true
-        if [ -d "docs/index_files" ]; then
-          git add docs/index_files/
-        fi
-
-        # Hacer commit si hay cambios
-        git diff --quiet && git diff --staged --quiet || git commit -m "Actualización automática de datos Movebank y mapa interactivo"
-
-        # Hacer push
+        git add -A  # Asegurar que TODOS los archivos se actualicen
+        git commit -m "Forzando actualización de archivos Leaflet y datos GPS" --allow-empty
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-
