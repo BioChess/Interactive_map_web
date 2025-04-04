@@ -65,6 +65,9 @@ imap <- imap %>%
     options = layersControlOptions(collapsed = FALSE)  # Mostrar la lista expandida
   )
 
+if (!dir.exists("docs")) {
+  dir.create("docs")
+}
 # Guardar el mapa como archivo HTML
 saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
 # Mueve `index_files/` dentro de `docs/`
