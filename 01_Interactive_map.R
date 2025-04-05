@@ -65,6 +65,9 @@ for (bird in grupos) {
 #    options = layersControlOptions(collapsed = FALSE)  # Mostrar la lista expandida
 #  )
 
+if (file.exists("docs/index.html")) file.remove("docs/index.html")
+if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
+
 if (!dir.exists("docs")) {
   dir.create("docs")
 }
