@@ -77,17 +77,15 @@ gps.df$sex <- ifelse(gps.df$sex == 'f', 'Female', 'Unknown')
 
 head(gps.df)
 
-
-if (file.exists("gps_data.csv")) file.remove("gps_data.csv")
-if (file.exists("gps_data.json")) file.remove("gps_data.json")
+# Crear un nombre de archivo con timestamp o número incremental
+timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
+csv_file <- paste0("gps_data_", timestamp, ".csv")
+json_file <- paste0("gps_data_", timestamp, ".json")ç
 
 # Guardar en CSV
-write.csv(gps.df, "gps_data.csv", row.names = FALSE)
+write.csv(gps.df, csv_file, row.names = FALSE)
 
 # Guardar en JSON
-write_json(gps.df, "gps_data.json", pretty = TRUE)
+write_json(gps.df, json_file, pretty = TRUE)
 
-if (!file.exists("gps_data.csv") || file.info("gps_data.csv")$size == 0) {
-  stop("Error: gps_data.csv no se generó correctamente.")
-}
 
