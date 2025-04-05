@@ -2,8 +2,12 @@ library(leaflet)
 library(dplyr)
 library(htmlwidgets)
 
-# Cargar los datos GPS descargados previamente
-gps.df <- read.csv("gps_data.csv")
+# Buscar el archivo gps_data_ más reciente
+gps_files <- list.files(pattern = "gps_data_\\d+.*\\.csv")
+latest_file <- gps_files[which.max(file.info(gps_files)$mtime)]
+
+# Leer el archivo más reciente
+gps.df <- read.csv(latest_file)
 
 # Convertir la columna de fecha a formato adecuado
 gps.df$datetimeGMT <- as.POSIXct(gps.df$datetimeGMT, format="%Y-%m-%d %H:%M:%S", tz="GMT")
