@@ -2,9 +2,9 @@ name: Actualizar datos Movebank
 
 on:
   schedule:
-    - cron: '0 */4 * * *'  # Ejecutar cada 12 horas
+    - cron: '0 */4 * * *'  # Ejecutar cada 4 horas
   workflow_dispatch:  # Permite ejecución manual
-  
+
 jobs:
   update-movebank:
     runs-on: ubuntu-latest
@@ -29,14 +29,16 @@ jobs:
 
     - name: Limpiar archivos anteriores
       run: |
-        rm -rf docs/*
         rm -f gps_data.csv gps_data.json
+        rm -f docs/index.html
+        rm -rf docs/index_files
+        mkdir -p docs  # Crea la carpeta si no existe
 
     - name: Descargar datos de Movebank
       run: |
         Rscript 00_Download_data_Movebank.R
 
-        # Verificar que el archivo se ha creado y tiene contenido
+        # Verificar si se creó el archivo correctamente
         if [ ! -s gps_data.csv ]; then
           echo "Error: gps_data.csv no se generó o está vacío."
           exit 1
@@ -47,17 +49,15 @@ jobs:
 
     - name: Generar mapa interactivo
       run: |
-        set -e
         Rscript 01_Interactive_map.R
 
-        # Mover index_files/ a docs/ si existe
+        # Mover archivos HTML si existen
         if [ -d "index_files" ]; then
           mv -u index_files docs/
         fi
 
-        # Verificar que index.html se generó correctamente
         if [ ! -s docs/index.html ]; then
-          echo "Error: docs/index.html está vacío o no se generó."
+          echo "Error: docs/index.html no se generó correctamente."
           exit 1
         fi
 
@@ -70,8 +70,9 @@ jobs:
         git fetch origin main
         git reset --hard origin/main
 
-        git add -A  # Asegurar que TODOS los archivos se actualicen
-        git commit -m "Forzando actualización de archivos Leaflet y datos GPS" --allow-empty
+        git add -A
+        git commit -m "Forzando actualización de archivos Leaflet y datos GPS" || echo "Sin cambios para hacer commit"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
