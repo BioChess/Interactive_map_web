@@ -29,18 +29,18 @@ jobs:
 
     - name: Limpiar archivos anteriores
       run: |
-        rm -f gps_data.csv gps_data.json
+        # Limpia el HTML anterior
         rm -f docs/index.html
         rm -rf docs/index_files
-        mkdir -p docs  # Crea la carpeta si no existe
+        mkdir -p docs
 
     - name: Descargar datos de Movebank
       run: |
         Rscript 00_Download_data_Movebank.R
 
-        # Verificar si se creó el archivo correctamente
-        if [ ! -s gps_data.csv ]; then
-          echo "Error: gps_data.csv no se generó o está vacío."
+        # Verificar que el nuevo archivo fue generado
+        if ! ls gps_data_*.csv 1> /dev/null 2>&1; then
+          echo "Error: No se generó ningún archivo gps_data_*.csv"
           exit 1
         fi
       env:
@@ -51,7 +51,6 @@ jobs:
       run: |
         Rscript 01_Interactive_map.R
 
-        # Mover archivos HTML si existen
         if [ -d "index_files" ]; then
           mv -u index_files docs/
         fi
@@ -70,10 +69,20 @@ jobs:
         git fetch origin main
         git reset --hard origin/main
 
-        git add -A
-        git commit -m "Forzando actualización de archivos Leaflet y datos GPS" || echo "Sin cambios para hacer commit"
+        # Limpiar archivos GPS antiguos (mantener los 2 más recientes)
+        ls -tp gps_data_*.csv | grep -v '/$' | tail -n +3 | xargs -I {} rm -- {} || true
+        ls -tp gps_data_*.json | grep -v '/$' | tail -n +3 | xargs -I {} rm -- {} || true
+
+        # Agregar los nuevos archivos
+        git add gps_data_*.csv gps_data_*.json docs/index.html
+        if [ -d "docs/index_files" ]; then
+          git add docs/index_files/
+        fi
+
+        git commit -m "Actualización automática con archivos timestamp" || echo "Sin cambios para hacer commit"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
