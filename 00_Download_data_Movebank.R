@@ -18,12 +18,12 @@ print(loginStored)
 
 # Storing the study name
 st <- "AMPLIAMAR (Manx shearwaters)"
-print(paste("Study name:", st))  # Debugging
+#print(paste("Study name:", st))  # Debugging
 
 # Verify if study exists
 studies <- getMovebankStudies(login = loginStored)
-print("Available studies:")
-print(studies)
+#print("Available studies:")
+#print(studies)
 
 # Check if the study exists
 if (!(st %in% studies)) {
@@ -36,7 +36,7 @@ animals <- c("5020551", "5102431", "5102432", "5102433", "5102434", "5102435")
 Animal_Data <- getMovebankAnimals(study = st, login = loginStored)
 
 # Debugging: Check retrieved data
-print(Animal_Data)
+#print(Animal_Data)
 
 # If no data is retrieved, stop the script
 if (nrow(Animal_Data) == 0) {
@@ -80,7 +80,7 @@ head(gps.df)
 # Crear un nombre de archivo con timestamp o número incremental
 timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
 csv_file <- paste0("gps_data_", timestamp, ".csv")
-json_file <- paste0("gps_data_", timestamp, ".json")ç
+json_file <- paste0("gps_data_", timestamp, ".json")
 
 # Guardar en CSV
 write.csv(gps.df, csv_file, row.names = FALSE)
