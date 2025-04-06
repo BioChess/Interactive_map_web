@@ -47,13 +47,22 @@ jobs:
     - name: Generar mapa interactivo
       run: |
         Rscript 01_Interactive_map.R
+    
+        # Verifica si se generó el index_files y muévelo a docs
         if [ -d "index_files" ]; then
-          mv -u index_files docs/
+          rm -rf docs/index_files  # Asegura que no haya conflicto
+          mv index_files docs/
+        else
+          echo "Error: No se generó index_files, el mapa no funcionará en GitHub Pages."
+          exit 1
         fi
+    
+        # Verifica que index.html esté en docs/
         if [ ! -s docs/index.html ]; then
           echo "Error: docs/index.html no se generó correctamente."
           exit 1
         fi
+
 
     - name: Subir cambios a GitHub
       run: |
