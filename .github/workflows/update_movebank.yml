@@ -1,9 +1,9 @@
-name: Actualizar datos Movebank
+nname: Actualizar datos Movebank
 
 on:
   schedule:
     - cron: '0 */4 * * *'  # Ejecutar cada 4 horas
-  workflow_dispatch:  # Permite ejecución manual
+  workflow_dispatch:
 
 jobs:
   update-movebank:
@@ -29,7 +29,6 @@ jobs:
 
     - name: Limpiar archivos anteriores
       run: |
-        # Limpia el HTML anterior
         rm -f docs/index.html
         rm -rf docs/index_files
         mkdir -p docs
@@ -37,7 +36,6 @@ jobs:
     - name: Descargar datos de Movebank
       run: |
         Rscript 00_Download_data_Movebank.R
-        # Verificar que el nuevo archivo fue generado
         if ! ls gps_data_*.csv 1> /dev/null 2>&1; then
           echo "Error: No se generó ningún archivo gps_data_*.csv"
           exit 1
@@ -48,8 +46,6 @@ jobs:
 
     - name: Generar mapa interactivo
       run: |
-        rm -f docs/index.html
-        
         Rscript 01_Interactive_map.R
         if [ -d "index_files" ]; then
           mv -u index_files docs/
@@ -77,10 +73,11 @@ jobs:
           git add docs/index_files/
         fi
 
-        git commit -m "Actualización automática con archivos timestamp" || echo "Sin cambios para hacer commit"
+        git commit -m "Actualización automática con archivos actualizados" || echo "Sin cambios para hacer commit"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
