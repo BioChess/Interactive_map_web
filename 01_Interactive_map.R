@@ -69,6 +69,16 @@ for (bird in grupos) {
 #    options = layersControlOptions(collapsed = FALSE)  # Mostrar la lista expandida
 #  )
 
+# Obtener timestamp de actualización
+timestamp <- format(Sys.time(), tz = "GMT", usetz = TRUE)
+
+# Crear texto HTML para mostrar en el mapa
+update_label <- paste0("Última actualización: ", timestamp)
+
+# Añadir el control al mapa (abajo a la derecha)
+imap <- imap %>%
+  addControl(html = update_label, position = "topright")
+
 if (file.exists("docs/index.html")) file.remove("docs/index.html")
 if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
 
