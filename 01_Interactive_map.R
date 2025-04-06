@@ -28,13 +28,10 @@ imap <- leaflet(options = leafletOptions) %>%
 grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
 
 for (bird in grupos) {
+  # print(bird)
   gps.ind <- gps.df2 %>% filter(birdID == bird)  # Filtrar datos por birdID
- 
-  if (nrow(gps.df2) == 0 || all(is.na(gps.df2$datetimeGMT))) {
-  cat("Error: No hay datos en gps.df2 o solo contiene NA.")
-  next
-} 
-  lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT, na.rm = TRUE))
+  lst_pos <- datos_individual %>% filter(datetimeGMT == max(datetimeGMT))  # Último punto
+  
   imap <- imap %>%
     addPolylines(
       lng = ~longitude, lat = ~latitude, 
@@ -46,22 +43,21 @@ for (bird in grupos) {
     addCircleMarkers(
       lng = ~longitude, lat = ~latitude, 
       data = gps.ind,
-      radius = 0.5,
-      color = ~pal.colors(birdID), 
-      popup = ~paste("ID:", birdID, "<br>Date:", datetimeGMT, "Sex:", sex),
+      radius = 0.5, color = ~paleta_colores(birdID), 
+      popup = ~paste("ID:", birdID, "<br>Fecha:", datetimeGMT, "Sex:", sex),
       group = bird  # Asigna un grupo con el nombre del birdID
     ) %>% 
+    # Agregar la última posición como una estrella
     addAwesomeMarkers(
       lng = ~longitude, lat = ~latitude,
       data = lst_pos,
       icon = awesomeIcons(
         icon = 'star', library = 'fa', markerColor = 'red'
       ),
-      popup = ~paste("ID:", birdID, "<br>Date:", datetimeGMT, "Sex:", sex),
+      popup = ~paste("ID:", birdID, "<br>Fecha:", datetimeGMT, "Sex:", sex),
       group = bird
     )
 }
-
 # Agregar control de capas para activar/desactivar individuos
 #imap <- imap %>%
 #  addLayersControl(
