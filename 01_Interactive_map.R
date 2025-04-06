@@ -93,8 +93,8 @@ if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
 if (!dir.exists("docs")) {
   dir.create("docs")
 }
-
-saveWidget(imap, file = "docs/index.html", selfcontained = FALSE, libdir = "docs/index_files")
+saveWidget(imap, file = "docs/index.html", selfcontained = TRUE)
+#saveWidget(imap, file = "docs/index.html", selfcontained = FALSE, libdir = "docs/index_files")
 cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
     file = "docs/index.html", append = TRUE)
 
