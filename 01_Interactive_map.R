@@ -82,16 +82,17 @@ imap <- imap %>%
 if (file.exists("docs/index.html")) file.remove("docs/index.html")
 if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
 
+# Guardar el mapa correctamente
 if (!dir.exists("docs")) {
   dir.create("docs")
 }
 
+saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
 cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
     file = "docs/index.html", append = TRUE)
 
-# Guardar el mapa con timestamp
-html_file <- paste0("docs/index_", timestamp, ".html")
-saveWidget(imap, file = html_file, selfcontained = FALSE)
+
+
 
 
 
