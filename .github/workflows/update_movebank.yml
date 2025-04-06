@@ -1,4 +1,4 @@
-nname: Actualizar datos Movebank
+name: Actualizar datos Movebank
 
 on:
   schedule:
