@@ -43,7 +43,7 @@ for (bird in grupos) {
     addCircleMarkers(
       lng = ~longitude, lat = ~latitude, 
       data = gps.ind,
-      radius = 0.5, color = ~paleta_colores(birdID), 
+      radius = 0.5, color = ~pal.colors(birdID), 
       popup = ~paste("ID:", birdID, "<br>Fecha:", datetimeGMT, "Sex:", sex),
       group = bird  # Asigna un grupo con el nombre del birdID
     ) %>% 
