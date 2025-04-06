@@ -94,7 +94,7 @@ if (!dir.exists("docs")) {
   dir.create("docs")
 }
 
-saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
+saveWidget(imap, file = "docs/index.html", selfcontained = FALSE, libdir = "docs/index_files")
 cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
     file = "docs/index.html", append = TRUE)
 
