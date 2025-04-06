@@ -77,5 +77,8 @@ if (!dir.exists("docs")) {
 }
 # Guardar el mapa como archivo HTML
 saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
-# Mueve `index_files/` dentro de `docs/`
-file.rename("index_files", "docs/index_files")
+
+# Añadir una marca de tiempo como comentario al final del HTML
+timestamp <- format(Sys.time(), tz = "GMT", usetz = TRUE)
+cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
+    file = "docs/index.html", append = TRUE)
