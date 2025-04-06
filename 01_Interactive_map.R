@@ -30,7 +30,7 @@ grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
 for (bird in grupos) {
   # print(bird)
   gps.ind <- gps.df2 %>% filter(birdID == bird)  # Filtrar datos por birdID
-  lst_pos <- datos_individual %>% filter(datetimeGMT == max(datetimeGMT))  # Último punto
+  lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT))  # Último punto
   
   imap <- imap %>%
     addPolylines(
