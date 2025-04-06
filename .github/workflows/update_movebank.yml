@@ -49,6 +49,9 @@ jobs:
 
     - name: Generar mapa interactivo
       run: |
+        # Eliminar index.html ANTES de generar el nuevo
+        rm -f docs/index.html
+        
         Rscript 01_Interactive_map.R
 
         if [ -d "index_files" ]; then
