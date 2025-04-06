@@ -82,6 +82,10 @@ update_label <- paste0("Última actualización: ", Sys.time())
 imap <- imap %>%
   addControl(html = update_label, position = "topright")
 
+if (length(imap$x$calls) == 0) {
+  imap <- imap %>% addControl(html = "Sin datos recientes para mostrar", position = "topright")
+}
+
 if (file.exists("docs/index.html")) file.remove("docs/index.html")
 if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
 
