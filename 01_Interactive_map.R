@@ -85,10 +85,16 @@ if (dir.exists("docs/index_files")) unlink("docs/index_files", recursive = TRUE)
 if (!dir.exists("docs")) {
   dir.create("docs")
 }
-# Guardar el mapa como archivo HTML
-saveWidget(imap, file = "docs/index.html", selfcontained = FALSE)
 
 # Añadir una marca de tiempo como comentario al final del HTML
-timestamp <- format(Sys.time(), tz = "GMT", usetz = TRUE)
+timestamp <- format(Sys.time(), "%Y%m%d_%H%M", tz = "GMT", usetz = TRUE)
 cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
     file = "docs/index.html", append = TRUE)
+
+# Guardar el mapa con timestamp
+html_file <- paste0("docs/index_", timestamp, ".html")
+saveWidget(imap, file = html_file, selfcontained = FALSE)
+
+# Copiar o renombrar como index.html para GitHub Pages
+file.copy(html_file, "docs/index.html", overwrite = TRUE)
+
