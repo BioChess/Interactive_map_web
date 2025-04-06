@@ -73,8 +73,8 @@ jobs:
         git reset --hard origin/main
 
         # Limpiar archivos GPS antiguos (mantener los 2 más recientes)
-        ls -tp gps_data_*.csv | grep -v '/$' | tail -n +3 | xargs -I {} rm -- {} || true
-        ls -tp gps_data_*.json | grep -v '/$' | tail -n +3 | xargs -I {} rm -- {} || true
+        ls -tp gps_data_*.csv 2>/dev/null | grep -v '/$' | tail -n +3 | xargs -r rm --
+        ls -tp gps_data_*.json 2>/dev/null | grep -v '/$' | tail -n +3 | xargs -r rm --
 
         # Agregar los nuevos archivos
         git add gps_data_*.csv gps_data_*.json docs/index.html
