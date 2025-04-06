@@ -30,6 +30,13 @@ grupos <- unique(gps.df$birdID)  # Obtener los ID únicos
 for (bird in grupos) {
   # print(bird)
   gps.ind <- gps.df2 %>% filter(birdID == bird)  # Filtrar datos por birdID
+  
+  # Saltar si gps.ind está vacío o todo son NA
+  if (nrow(gps.ind) == 0 || all(is.na(gps.ind$datetimeGMT))) {
+    cat("Advertencia: No hay datos válidos para", bird, "\n")
+    next
+  }
+  
   lst_pos <- gps.ind %>% filter(datetimeGMT == max(datetimeGMT))  # Último punto
   
   imap <- imap %>%
