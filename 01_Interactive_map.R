@@ -76,7 +76,7 @@ for (bird in grupos) {
 timestamp <- format(Sys.time(), "%Y%m%d_%H%M", tz = "GMT", usetz = TRUE)
 
 # Crear texto HTML para mostrar en el mapa
-update_label <- paste0("Última actualización: ", Sys.time())
+update_label <- paste0("Última actualización: ", format(Sys.time(), "%d-%m-%Y %H:%M", tz = "GMT", usetz = TRUE))
 
 # Añadir el control al mapa (abajo a la derecha)
 imap <- imap %>%
