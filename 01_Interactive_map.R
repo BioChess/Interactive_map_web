@@ -86,7 +86,6 @@ if (!dir.exists("docs")) {
   dir.create("docs")
 }
 
-
 cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
     file = "docs/index.html", append = TRUE)
 
@@ -94,7 +93,5 @@ cat(sprintf("\n<!-- Última actualización: %s -->\n", timestamp),
 html_file <- paste0("docs/index_", timestamp, ".html")
 saveWidget(imap, file = html_file, selfcontained = FALSE)
 
-# Copiar o renombrar como index.html para GitHub Pages
-file.copy(html_file, "docs/index.html", overwrite = TRUE)
 
 
