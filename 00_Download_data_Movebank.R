@@ -85,7 +85,4 @@ json_file <- paste0("gps_data_", timestamp, ".json")
 # Guardar en CSV
 write.csv(gps.df, csv_file, row.names = FALSE)
 
-# Guardar en JSON
-write_json(gps.df, json_file, pretty = TRUE)
-
 
