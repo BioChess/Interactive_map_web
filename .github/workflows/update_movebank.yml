@@ -24,7 +24,7 @@ jobs:
     - name: Instalar paquetes R
       run: |
         Rscript -e 'if (!requireNamespace("pacman", quietly = TRUE)) install.packages("pacman")'
-        Rscript -e 'pacman::p_load(dplyr, lubridate, move, leaflet, htmlwidgets, jsonlite, remotes)'
+        Rscript -e 'pacman::p_load(dplyr, lubridate, move, leaflet, htmlwidgets, remotes)'
         Rscript -e 'if (!"move" %in% installed.packages()[,"Package"]) remotes::install_version("move", version = "4.0.6", repos = "http://cran.us.r-project.org")'
 
     - name: Limpiar archivos anteriores
@@ -70,10 +70,9 @@ jobs:
 
         # Limpiar archivos GPS antiguos (mantener los 2 más recientes)
         ls -tp gps_data_*.csv 2>/dev/null | grep -v '/$' | tail -n +3 | xargs -r rm --
-        ls -tp gps_data_*.json 2>/dev/null | grep -v '/$' | tail -n +3 | xargs -r rm --
-
+        
         # Agregar los nuevos archivos
-        git add gps_data_*.csv gps_data_*.json docs/index.html
+        git add gps_data_*.csv docs/index.html
         if [ -d "docs/index_files" ]; then
           git add docs/index_files/
         fi
