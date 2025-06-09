@@ -17,7 +17,7 @@ loginStored <- movebankLogin(username = user, password = password)
 print(loginStored)
 
 # Storing the study name
-st <- "AMPLIAMAR (Manx shearwaters)"
+st <- "AMPLIAMAR (European shag, Murcia)"
 #print(paste("Study name:", st))  # Debugging
 
 # Verify if study exists
@@ -31,8 +31,6 @@ if (!(st %in% studies)) {
 }
 
 # Storing the names of the individuals
-animals <- c("5020551", "5102431", "5102432", "5102433", "5102434", "5102435")
-
 Animal_Data <- getMovebankAnimals(study = st, login = loginStored)
 
 # Debugging: Check retrieved data
@@ -73,14 +71,16 @@ if (nrow(gps.df) == 0) {
 
 gps.df$sex <- gps@idData$sex[match(gps.df$birdID, gps@idData$ring_id)]
 
-gps.df$sex <- ifelse(gps.df$sex == 'f', 'Female', 'Unknown')
+gps.df$sex <- case_when(gps.df$sex == 'f' ~ 'Female', 
+                        gps.df$sex == 'm' ~ 'Male',
+                        T ~ 'Unknown')
 
 head(gps.df)
 
 # Crear un nombre de archivo con timestamp o número incremental
 timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
 csv_file <- paste0("gps_data_", timestamp, ".csv")
-json_file <- paste0("gps_data_", timestamp, ".json")
+# json_file <- paste0("gps_data_", timestamp, ".json")
 
 # Guardar en CSV
 write.csv(gps.df, csv_file, row.names = FALSE)
